@@ -1,9 +1,13 @@
 spring:
   datasource:
     driver-class-name: org.sqlite.JDBC
-    url: jdbc:sqlite:H:\\sqlite\\db.db
+    url: jdbc:sqlite:./db.db
     username:
     password:
+    #初始化的数据
+    data: classpath:init-data.sql
+    # Initialize the datasource with available DDL and DML scripts.
+    initialization-mode: always
   jpa:
     database-platform: henryhui.site.study.data.SQLiteDialect
     hibernate:
@@ -17,4 +21,4 @@ spring:
 
 logging:
   config: classpath:logback-spring.xml
-  file.path: H:\\logs\\spring-boot-study
+  file.path: ./logs

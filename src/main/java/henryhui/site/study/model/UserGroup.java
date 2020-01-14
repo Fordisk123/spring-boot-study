@@ -1,7 +1,7 @@
 package henryhui.site.study.model;
 
 
-import henryhui.site.study.converter.UserRoleListConverter;
+import henryhui.site.study.data.converter.UserRoleListConverter;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -11,7 +11,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "user_group")
-public class UserGroup {
+public class UserGroup extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)

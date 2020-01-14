@@ -1,4 +1,4 @@
-package henryhui.site.study.converter;
+package henryhui.site.study.data.converter;
 
 
 import henryhui.site.study.model.UserRole;

@@ -1,7 +1,6 @@
 package henryhui.site.study.model;
 
 
-import henryhui.site.study.converter.UserRoleListConverter;
 import lombok.Data;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +13,7 @@ import java.util.*;
 @Entity
 @Table(name = "user")
 //public class User implements UserDetails {
-public class User{
+public class User extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "ID", unique = true, nullable = false)

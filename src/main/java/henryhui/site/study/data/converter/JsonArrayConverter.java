@@ -1,7 +1,6 @@
-package henryhui.site.study.converter;
+package henryhui.site.study.data.converter;
 
 import com.alibaba.fastjson.JSON;
-import henryhui.site.study.model.UserRole;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
