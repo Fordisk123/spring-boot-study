@@ -1,6 +1,8 @@
 package henryhui.site.study.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import henryhui.site.study.data.converter.UserRoleListConverter;
 import lombok.Data;
 //import org.springframework.security.core.GrantedAuthority;
 //import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,7 +17,7 @@ import java.util.*;
 //public class User implements UserDetails {
 public class User extends BaseEntity{
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
     private Long id;
 
@@ -25,8 +27,15 @@ public class User extends BaseEntity{
     @Column(name = "password")
     private String password;
 
-    @ManyToMany(mappedBy = "linkedUser")
-    private Set<UserGroup> userGroups;
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.REMOVE)
+    @JoinTable(
+            name = "user_group_link",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_group_id"))
+    Set<UserGroup> linkedUserGroup;
+
+
 
 //    @Override
 //    public Collection<? extends GrantedAuthority> getAuthorities() {

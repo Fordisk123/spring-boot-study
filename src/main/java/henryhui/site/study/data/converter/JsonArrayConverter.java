@@ -12,6 +12,8 @@ public class JsonArrayConverter<T> {
     }
 
     public List<T> convertToEntityAttribute(String s) {
+//        System.out.println(s);
+//        System.out.println(JSON.parseArray(s, (Class <T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]));
         return JSON.parseArray(s, (Class <T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
     }
 }

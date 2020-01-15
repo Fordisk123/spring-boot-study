@@ -1,6 +1,7 @@
 package henryhui.site.study.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import henryhui.site.study.data.converter.UserRoleListConverter;
 import lombok.Data;
 
@@ -14,22 +15,20 @@ import java.util.Set;
 public class UserGroup extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID", unique = true, nullable = false)
     private Long id;
 
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_group_link",
-            joinColumns = @JoinColumn(name = "user_group_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    Set<User> linkedUser;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "linkedUserGroup")
+    private Set<User> linkedUser;
 
     @Column(name = "roles")
     @Convert(converter = UserRoleListConverter.class)
     private List<UserRole> roles;
+
 
 }
