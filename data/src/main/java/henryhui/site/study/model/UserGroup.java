@@ -29,7 +29,7 @@ public class UserGroup extends BaseEntity {
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
-    },mappedBy = "linkedUserGroups")
+    },fetch = FetchType.EAGER,mappedBy = "linkedUserGroups")
     @JsonIgnoreProperties("linkedUserGroups")
     private Set<User> linkedUsers;
 
