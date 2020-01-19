@@ -1,6 +1,5 @@
 package henryhui.site.study.auth;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -48,7 +47,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public PasswordEncoder passwordEncoderBean() {
-        return new BCryptPasswordEncoder();
+        return new NoPasswordEncoder();
     }
 
     /**
@@ -56,7 +55,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
      * DaoAuthenticationProvider是SpringSecurity提供的AuthenticationProvider默认实现类
      * 授权方式提供者，判断授权有效性，用户有效性，在判断用户是否有效性，
      * 它依赖于UserDetailsService实例，可以自定义UserDetailsService的实现。
-     * 技巧01：
      *
      * @return
      */

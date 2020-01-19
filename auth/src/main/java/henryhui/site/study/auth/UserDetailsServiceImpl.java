@@ -20,7 +20,7 @@ import java.util.Collection;
 import java.util.Set;
 
 @Service
-public class AuthService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserDao userDao;
