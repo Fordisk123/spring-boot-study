@@ -6,13 +6,11 @@ import henryhui.site.study.model.User;
 import henryhui.site.study.model.UserGroup;
 import henryhui.site.study.model.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,11 +25,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     UserGroupDao userGroupDao;
-
-    @Bean
-    public static NoOpPasswordEncoder passwordEncoder() {
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
-    }
 
     @Override
     public UserDetails loadUserByUsername(String loginName) throws UsernameNotFoundException {
