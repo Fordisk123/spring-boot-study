@@ -21,13 +21,11 @@ public class HelloWorldController {
         return "Hello World";
     }
 
-
     @GetMapping("/quasar")
     public String quasar(){
 
         Channel<Integer> fiberChannel = Channels.newChannel(-1);
         Channel<Integer> mainChannel = Channels.newChannel(-1);
-
 
         new Fiber(() -> {
             for(int i = 0 ; i < 1000 ; i++){
