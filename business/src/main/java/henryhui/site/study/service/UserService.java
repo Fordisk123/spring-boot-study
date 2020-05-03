@@ -6,6 +6,7 @@ import henryhui.site.study.model.User;
 import henryhui.site.study.model.UserGroup;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -21,7 +22,10 @@ public class UserService {
     @Autowired
     UserGroupDao userGroupDao;
 
-    public User createUser(User user){
+    @Value("demo.login.salt")
+    String salt;
+
+    public User createUser( User user){
         return userDao.save(user);
     }
 
@@ -38,18 +42,4 @@ public class UserService {
         user.setLinkedUserGroups(new HashSet<>(userGroups));
         return userDao.save(user);
     }
-
-    //    //为角色分配权限，传入一个角色的id，还有要分配权限对应的id数组
-//    @PostMapping("/SetPriv")
-//    public Role setPrivs(Long id,@RequestBody Long[] ids){
-//        Role role=roleRepository.findById(id).get();
-//        Set<Priv>privSet=new HashSet<>();
-//        for (long pid:ids) {
-//            privSet.add(privRepository.findById(pid).get());
-//        }
-//        role.setPrivs(privSet);
-//        roleRepository.save(role);
-//        return  role;
-//    }
-
 }

@@ -4,6 +4,7 @@ import henryhui.site.study.model.User;
 import henryhui.site.study.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public class UserController{
     UserService userService;
 
     @PutMapping("/createUser")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody @Validated User user) {
         log.info("In createUser");
         return userService.createUser(user);
     }

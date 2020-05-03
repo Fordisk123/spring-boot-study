@@ -25,3 +25,10 @@ spring:
 logging:
   config: classpath:logback-spring.xml
   file.path: ./logs
+
+
+demo:
+  login:
+    salt: R3RpK750B8h84wm2
+  auth:
+    secret: dEm0
