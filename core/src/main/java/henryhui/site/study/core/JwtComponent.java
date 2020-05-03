@@ -1,20 +1,19 @@
 package henryhui.site.study.core;
 
+import henryhui.site.study.core.properties.AuthProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
 public class JwtComponent {
-    //One Hour
-    public static final long EXPIRITION = 1000 * 60 * 60;
 
-    @Value("demo.auth.secret")
-    public String tokenSecret;
+    @Autowired
+    AuthProperties authProperties;
 
     /**
      * 生成token
@@ -31,14 +30,14 @@ public class JwtComponent {
                 .setSubject(loginName)
                 .claim("loginName",loginName)
                 .setIssuedAt(new Date(nowMillis))
-                .setExpiration(new Date(System.currentTimeMillis() + EXPIRITION))
-                .signWith(signatureAlgorithm, tokenSecret).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + authProperties.getExpiration()))
+                .signWith(signatureAlgorithm, authProperties.getTokenSecret()).compact();
         return token;
     }
 
     public Claims checkJWT(String token) {
         try {
-            final Claims claims = Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(token).getBody();
+            final Claims claims = Jwts.parser().setSigningKey(authProperties.getTokenSecret()).parseClaimsJws(token).getBody();
             return claims;
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,7 +51,7 @@ public class JwtComponent {
      * @return
      */
     public String getLoginName(String token){
-        Claims claims = Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(authProperties.getTokenSecret()).parseClaimsJws(token).getBody();
         return claims.get("loginName").toString();
     }
 
@@ -62,22 +61,7 @@ public class JwtComponent {
      * @return
      */
     public boolean isExpiration(String token){
-        Claims claims = Jwts.parser().setSigningKey(tokenSecret).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(authProperties.getTokenSecret()).parseClaimsJws(token).getBody();
         return claims.getExpiration().before(new Date());
     }
-
-//    public static void main(String[] args) {
-//        String name = "acong";
-//        String role = "rol";
-//        String token = createToken(name,role);
-//        System.out.println(token);
-//
-//        Claims claims = checkJWT(token);
-//        System.out.println(claims.get("username"));
-//
-//        System.out.println(getUsername(token));
-//        System.out.println(getUserRole(token));
-//        System.out.println(isExpiration(token));
-//
-//    }
 }

@@ -2,6 +2,7 @@ package henryhui.site.study.core.utils;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Base64;
 import java.util.Random;
 
 public class PasswordUtils {
@@ -19,7 +20,7 @@ public class PasswordUtils {
         cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
         byte[] encrypted = cipher.doFinal(password.getBytes("utf-8"));
 
-        return encrypted.toString();
+        return new String(Base64.getEncoder().encode(encrypted));
     }
 
     public static String decode(String password , String salt) throws Exception{
@@ -33,7 +34,7 @@ public class PasswordUtils {
         SecretKeySpec skeySpec = new SecretKeySpec(raw, "AES");
         Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
         cipher.init(Cipher.DECRYPT_MODE, skeySpec);
-        byte[] original = cipher.doFinal(password.getBytes());
+        byte[] original = cipher.doFinal(Base64.getDecoder().decode(password.getBytes()));
         String originalString = new String(original,"utf-8");
         return originalString;
     }
@@ -54,7 +55,14 @@ public class PasswordUtils {
         return val;
     }
 
-    public static void main(String[] args) {
-        System.out.printf(PasswordUtils.getCKey(16));
+    public static void main(String[] args) throws Exception {
+        String passwd = "test";
+        String slat = "156TS2d95jO997hS";
+        System.out.println(PasswordUtils.encode(passwd , slat));
+        System.out.println(PasswordUtils.encode("admin" , slat));
+            System.out.println(PasswordUtils.encode("admin" , "R3RpK750B8h84wm2"));
+        System.out.println(PasswordUtils.decode(PasswordUtils.encode(passwd , slat) , slat));
+
+        System.out.println(PasswordUtils.getCKey(16));
     }
 }

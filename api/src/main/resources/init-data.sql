@@ -1,5 +1,5 @@
 INSERT INTO user (login_name,password,create_by,create_time,last_modified_by,last_modified_time)
-SELECT 'admin','admin','SYSTEM',NOW(),'SYSTEM',NOW() WHERE NOT EXISTS (
+SELECT 'admin','KjxbmGG5LYpisyHFdJGPEw==','SYSTEM',NOW(),'SYSTEM',NOW() WHERE NOT EXISTS (
 SELECT 1 FROM user WHERE user.login_name='admin');
 
 INSERT INTO user_group (name,roles,create_by,create_time,last_modified_by,last_modified_time)

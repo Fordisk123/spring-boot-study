@@ -1,7 +1,9 @@
 package henryhui.site.study.controller;
 
+import henryhui.site.study.core.ApiResponse;
 import henryhui.site.study.model.User;
 import henryhui.site.study.service.UserService;
+import henryhui.site.study.service.exception.UserException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -17,19 +19,19 @@ public class UserController{
     UserService userService;
 
     @PutMapping("/createUser")
-    public User createUser(@RequestBody @Validated User user) {
+    public ApiResponse<User> createUser(@RequestBody @Validated User user) throws UserException {
         log.info("In createUser");
-        return userService.createUser(user);
+        return ApiResponse.Builder.success(userService.createUser(user));
     }
 
     @GetMapping("/user/{id}")
-    public User findUser(@PathVariable Long id){
-        return userService.getUser(id);
+    public ApiResponse<User> findUser(@PathVariable Long id){
+        return ApiResponse.Builder.success(userService.getUser(id));
     }
 
     @PutMapping("/changeUserGroup/{id}")
-    public User changeUserGroup(@PathVariable Long id , @RequestBody List<Long> userGroupIds) throws Exception{
-        return userService.changeUserGroup(id , userGroupIds);
+    public ApiResponse<User> changeUserGroup(@PathVariable Long id , @RequestBody List<Long> userGroupIds) throws Exception{
+        return ApiResponse.Builder.success(userService.changeUserGroup(id , userGroupIds));
     }
 
 

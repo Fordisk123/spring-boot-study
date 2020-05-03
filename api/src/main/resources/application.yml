@@ -28,7 +28,10 @@ logging:
 
 
 demo:
-  login:
-    salt: R3RpK750B8h84wm2
+  password:
+    salt:
+      save: R3RpK750B8h84wm2
+      input: 156TS2d95jO997hS
   auth:
     secret: dEm0
+    expiration: 3600000
