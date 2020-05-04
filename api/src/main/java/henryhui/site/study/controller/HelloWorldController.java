@@ -4,6 +4,7 @@ import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.SuspendExecution;
 import co.paralleluniverse.strands.channels.Channel;
 import co.paralleluniverse.strands.channels.Channels;
+import henryhui.site.study.service.operation.OperationLog;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 public class HelloWorldController {
+
+    @OperationLog(operate = "Hello world!")
     @RequestMapping("/hello")
     public String helloWorld() {
         log.info("In Hello world!");

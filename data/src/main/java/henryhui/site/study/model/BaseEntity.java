@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 @Setter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity implements Serializable {
+public class    BaseEntity implements Serializable {
     @Column(name = "create_time")
     @CreatedDate
     @Convert(converter = LocalDateTimeConverter.class)
